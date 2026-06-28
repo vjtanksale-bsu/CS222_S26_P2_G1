@@ -1,12 +1,12 @@
 def is_valid_course_count(value):
     """
     Validate whether input is a valid course count.
-    Clean logic function (TDD-friendly).
+    Must be integer between 1 and 7.
     """
 
     try:
         number = int(value)
-        return number > 0
+        return 1 <= number <= 7
     except (ValueError, TypeError):
         return False
 
@@ -14,24 +14,24 @@ def is_valid_course_count(value):
 def parse_course_count(value):
     """
     Convert valid input to integer.
-    Assume validation already passed.
+    Assumes validation already passed.
     """
     return int(value)
 
 
 def get_course_count():
     """
-    Interactive function (user input loop).
-    Keeps asking until valid input is entered.
+    Interactive loop: keeps asking until valid input is entered.
     """
 
     while True:
-        user_input = input("Enter number of courses: ")
+        user_input = input("Enter number of courses (1-7): ")
 
         if is_valid_course_count(user_input):
             return parse_course_count(user_input)
 
-        print("Invalid input. Please enter an integer > 0.")
+        print("Invalid input. Please enter an integer between 1 and 7.")
+
 
 if __name__ == "__main__":
     n = get_course_count()
