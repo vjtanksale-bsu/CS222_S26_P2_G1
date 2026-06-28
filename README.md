@@ -1,12 +1,9 @@
 # CS222_S26_P2_G1
 
-Story 1 - Available Course Numbers
+Story 1 ：
 Owner: Yan Xin  
+Read multiple course files, extract course numbers, remove duplicates, and return sorted available course list.
 
-Description: extract and display all unique course numbers from input files (courses.txt, courses1.txt, courses2.txt).
-
-Requirements
-- Read course data from files
-- Extract course numbers
-- Remove duplicates
-- Sort and display results
+Story 2 ：
+Owner: Yan Xin  
+Validate user input for course count (1–7), ensuring only valid integer values are accepted using a re-prompt loop.
