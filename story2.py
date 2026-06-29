@@ -1,38 +1,22 @@
-def is_valid_course_count(value):
-    """
-    Validate whether input is a valid course count.
-    Must be integer between 1 and 7.
-    """
-
+def is_valid_course_count(value, max_n):
+    """Check if input is between 1 and max_n."""
     try:
-        number = int(value)
-        return 1 <= number <= 7
+        return 1 <= int(value) <= max_n
     except (ValueError, TypeError):
         return False
 
 
 def parse_course_count(value):
-    """
-    Convert valid input to integer.
-    Assumes validation already passed.
-    """
+    """Convert input to int."""
     return int(value)
 
 
-def get_course_count():
-    """
-    Interactive loop: keeps asking until valid input is entered.
-    """
-
+def get_course_count(max_n):
+    """Get valid course count from user."""
     while True:
-        user_input = input("Enter number of courses (1-7): ")
+        user_input = input(f"Enter number of courses (1-{max_n}): ")
 
-        if is_valid_course_count(user_input):
+        if is_valid_course_count(user_input, max_n):
             return parse_course_count(user_input)
 
-        print("Invalid input. Please enter an integer between 1 and 7.")
-
-
-if __name__ == "__main__":
-    n = get_course_count()
-    print("You selected:", n)
+        print("Invalid input.")
