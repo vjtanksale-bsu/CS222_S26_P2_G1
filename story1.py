@@ -46,9 +46,3 @@ def get_all_available_courses(files):
 
     return extract_course_numbers(all_lines)
 
-if __name__ == "__main__":
-    files = ["courses.txt", "courses1.txt", "courses2.txt"]
-    result = get_all_available_courses(files)
-
-    print("Available course numbers:")
-    print(result)
