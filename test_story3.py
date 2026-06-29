@@ -1,19 +1,26 @@
-from story3 import is_valid_course, has_no_duplicates
+from story3 import is_valid_course, select_courses
 
 
 def test_valid_course():
     available = ["CS222", "CS120"]
-    assert is_valid_course("CS222", available) is True
+
+    assert is_valid_course("cs222", available) is True
+    assert is_valid_course("CS120", available) is True
 
 
 def test_invalid_course():
     available = ["CS222", "CS120"]
+
     assert is_valid_course("CS999", available) is False
 
 
-def test_no_duplicates_true():
-    assert has_no_duplicates(["CS222", "CS120"]) is True
+def test_select_courses(monkeypatch):
+    available = ["CS222", "CS120"]
 
+    inputs = iter(["cs222", "CS120"])
 
-def test_no_duplicates_false():
-    assert has_no_duplicates(["CS222", "CS222"]) is False
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = select_courses(2, available)
+
+    assert result == ["CS222", "CS120"]
