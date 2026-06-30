@@ -1,33 +1,27 @@
 def normalize_course(course):
-    """Convert input to clean uppercase format."""
+    """Clean input."""
     return course.strip().upper()
 
 
 def is_valid_course(course, available_courses):
-    """Check if course exists in available course list."""
+    """Check course exists."""
     return normalize_course(course) in available_courses
 
 
 def get_courses_from_user(n, available_courses):
-    """
-    Collect n valid courses from user input.
-    - Reject invalid courses
-    - Reject duplicates
-    """
+    """Get n valid courses."""
     selected = []
 
     while len(selected) < n:
         course = input(f"Enter course {len(selected)+1}/{n}: ")
         normalized = normalize_course(course)
 
-        # invalid course check
-        if normalized not in available_courses:
-            print("Invalid course. Not in available list.")
+        if not is_valid_course(course, available_courses):
+            print("Invalid course.")
             continue
 
-        # duplicate check
         if normalized in selected:
-            print("Duplicate course not allowed.")
+            print("Duplicate course.")
             continue
 
         selected.append(normalized)
@@ -36,5 +30,5 @@ def get_courses_from_user(n, available_courses):
 
 
 def select_courses(n, available_courses):
-    """Main interface for course selection."""
+    """Start selection."""
     return get_courses_from_user(n, available_courses)
