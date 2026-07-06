@@ -1,6 +1,7 @@
 from story1 import get_all_available_courses
 from story2 import get_course_count
 from story3 import select_courses
+from story4 import has_time_conflict
 
 # input files
 files = ["courses.txt", "courses1.txt", "courses2.txt"]
@@ -20,3 +21,6 @@ selected_courses = select_courses(n, available_courses)
 
 # Final output
 print("\nSelected courses:", selected_courses)
+
+conflicts = has_time_conflict(selected_courses)
+print("\nTime conflicts found:", conflicts)
