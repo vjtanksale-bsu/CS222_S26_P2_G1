@@ -2,6 +2,7 @@ from story1 import get_all_available_courses
 from story2 import get_course_count
 from story3 import select_courses
 from story4 import find_valid_schedule
+from story5 import generate_schedule
 
 
 # Course files
@@ -56,3 +57,13 @@ else:
             f"{course['days']} "
             f"{course['start']}-{course['end']}"
         )
+
+
+# Story 5
+schedule = find_valid_schedule(
+    selected_courses,
+    files
+)
+
+print("\nFinal Schedule:")
+print(generate_schedule(schedule))
