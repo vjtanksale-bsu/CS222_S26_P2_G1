@@ -8,6 +8,7 @@ Team Members:
 Yan Xin, Deja Randolph, Jinzhou Li
 
 User story and Contribution:
+
 User Story 1 (Developer: Yan Xin):
 Reads course information from the input file and extracts available course numbers.  
 Provides the course list for students to select from.
