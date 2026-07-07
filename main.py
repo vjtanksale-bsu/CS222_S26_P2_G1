@@ -45,25 +45,6 @@ schedule = find_valid_schedule(
 )
 
 
-if schedule is None:
-    print("\nNo valid schedule found.")
-else:
-    print("\nValid schedule:")
-
-    for course in schedule:
-        print(
-            f"{course['course']} "
-            f"Section {course['section']} "
-            f"{course['days']} "
-            f"{course['start']}-{course['end']}"
-        )
-
-
-# Story 5
-schedule = find_valid_schedule(
-    selected_courses,
-    files
-)
-
+# Story 5: Generate final schedule
 print("\nFinal Schedule:")
 print(generate_schedule(schedule))
