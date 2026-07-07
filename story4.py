@@ -24,7 +24,6 @@ def read_course_data(files):
 
                         course_number = course["course"]
 
-                        # Store all sections of the same course
                         if course_number not in courses:
                             courses[course_number] = []
 
@@ -37,46 +36,68 @@ def read_course_data(files):
 
 
 def is_time_conflict(course1, course2):
-    """Check if two sections have overlapping time."""
+    """Check if two sections have time conflict."""
 
-    # Check if the two courses meet on the same days
+    # Check same meeting days
     same_days = set(course1["days"]) & set(course2["days"])
 
     if not same_days:
         return False
 
-    # Check if their time intervals overlap
-    time_overlap = (
+    # Check overlapping time
+    return (
         max(course1["start"], course2["start"])
         <
         min(course1["end"], course2["end"])
     )
 
-    return time_overlap
 
-
-def has_time_conflict(selected_courses, files):
-    """Check conflicts between selected courses."""
+def find_valid_schedule(selected_courses, files):
+    """
+    Find sections without time conflicts.
+    Return valid section combination.
+    """
 
     course_data = read_course_data(files)
 
-    # Compare every pair of selected courses
-    for i in range(len(selected_courses)):
-        for j in range(i + 1, len(selected_courses)):
+    selected_sections = []
 
-            course1_sections = course_data.get(
-                selected_courses[i], []
-            )
+    def backtrack(index):
+        # All courses have assigned sections
+        if index == len(selected_courses):
+            return True
 
-            course2_sections = course_data.get(
-                selected_courses[j], []
-            )
+        course = selected_courses[index]
 
-            # Check every possible section combination
-            for section1 in course1_sections:
-                for section2 in course2_sections:
+        sections = course_data.get(course, [])
 
-                    if is_time_conflict(section1, section2):
-                        return True
+        for section in sections:
 
-    return False
+            conflict = False
+
+            # Check this section with previous selections
+            for selected in selected_sections:
+                if is_time_conflict(section, selected):
+                    conflict = True
+                    break
+
+            # Try next section if conflict exists
+            if conflict:
+                continue
+
+            # Choose this section
+            selected_sections.append(section)
+
+            if backtrack(index + 1):
+                return True
+
+            # Remove if it does not work
+            selected_sections.pop()
+
+        return False
+
+
+    if backtrack(0):
+        return selected_sections
+
+    return None
