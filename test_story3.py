@@ -24,3 +24,13 @@ def test_select_courses(monkeypatch):
 
     assert result == ["CS222", "CS120"]
     assert len(result) == 2
+
+def test_user_cannot_enter_same_course_more_than_once(monkeypatch, capsys):
+    available_courses = ["CS120", "CS222"]
+    inputs = iter(["CS222", "cs222", "CS120"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = select_courses(2, available_courses)
+
+    assert result == ["CS222", "CS120"]
+    assert "Duplicate course." in capsys.readouterr().out
